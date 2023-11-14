@@ -7,6 +7,8 @@ const stopButton = document.querySelector('[data-stop]');
 
 let colorChangeInterval;
 
+stopButton.disabled = true;
+
 startButton.addEventListener('click', () => {
     startButton.disabled = true;
     stopButton.disabled = false;

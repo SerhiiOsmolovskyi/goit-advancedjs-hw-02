@@ -32,7 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
             position: 'topRight',
             });
         });
-    }
+      }
+      delayInput.value = '';
+      stepInput.value = '';
+      amountInput.value = '';
   });
 
   function createPromise(position, delay) {

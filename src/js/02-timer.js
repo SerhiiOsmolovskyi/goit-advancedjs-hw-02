@@ -76,26 +76,32 @@ document.addEventListener('DOMContentLoaded', function () {
     label.style.color = '#555';
   });
 
-  function startTimer(endDate) {
-    const interval = setInterval(() => {
-      const timeDifference = endDate - new Date();
+function startTimer(endDate) {
+  document.querySelector("#datetime-picker").disabled = true;
+  
+  document.querySelector('button[data-start]').disabled = true;
 
-      if (timeDifference < 0) {
-        clearInterval(interval);
-        iziToast.success({
-          title: 'Success',
-          message: 'Countdown timer reached zero!',
-        });
-      } else {
-        const time = convertMs(timeDifference);
+  const interval = setInterval(() => {
+    const timeDifference = endDate - new Date();
 
-        document.querySelector('[data-days]').textContent = addLeadingZero(time.days);
-        document.querySelector('[data-hours]').textContent = addLeadingZero(time.hours);
-        document.querySelector('[data-minutes]').textContent = addLeadingZero(time.minutes);
-        document.querySelector('[data-seconds]').textContent = addLeadingZero(time.seconds);
-      }
-    }, 1000);
-  }
+    if (timeDifference < 0) {
+      clearInterval(interval);
+      iziToast.success({
+        title: 'Success',
+        message: 'Countdown timer reached zero!',
+      });
+      document.querySelector("#datetime-picker").disabled = false;
+      document.querySelector('button[data-start]').disabled = false;
+    } else {
+      const time = convertMs(timeDifference);
+
+      document.querySelector('[data-days]').textContent = addLeadingZero(time.days);
+      document.querySelector('[data-hours]').textContent = addLeadingZero(time.hours);
+      document.querySelector('[data-minutes]').textContent = addLeadingZero(time.minutes);
+      document.querySelector('[data-seconds]').textContent = addLeadingZero(time.seconds);
+    }
+  }, 1000);
+}
 
   function convertMs(ms) {
     const second = 1000;
